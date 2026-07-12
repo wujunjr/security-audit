@@ -41,13 +41,30 @@ export function InteractiveScanner() {
     setError(null);
 
     // Formulate API endpoint
-    // In local dev, wrangler dev usually runs on 8787, but we try relative first
     const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
-    const apiBase = isLocal ? "http://127.0.0.1:8787" : "";
+    const envApiUrl = import.meta.env.PUBLIC_API_URL;
+    let apiBase = "";
+    
+    if (envApiUrl) {
+      apiBase = envApiUrl.replace(/\/$/, "");
+    } else if (isLocal) {
+      apiBase = "http://127.0.0.1:8787";
+    }
+    
     const scanUrl = `${apiBase}/api/scan?url=${encodeURIComponent(urlInput.trim())}`;
 
     try {
       const response = await fetch(scanUrl);
+      const contentType = response.headers.get("content-type") || "";
+      
+      if (!contentType.includes("application/json")) {
+        throw new Error(
+          "Invalid API response (not JSON). The Worker API routing is not configured yet. " +
+          "Please deploy the Worker and map it to '/api/*' in your Cloudflare dashboard under Workers Routes, " +
+          "or set the PUBLIC_API_URL environment variable to your Worker URL during the Pages build."
+        );
+      }
+
       const data = await response.json();
 
       if (!response.ok) {
