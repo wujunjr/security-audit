@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { WaitlistForm } from "../components/WaitlistForm";
+import { site } from "../lib/site";
+---
+
+<BaseLayout
+  title="ShipAudit automatic scan waitlist"
+  description="Join the waitlist for ShipAudit public automated baseline scans. Not a live service yet."
+>
+  <section class="py-14 md:py-20">
+    <div class="shell max-w-xl">
+      <p class="eyebrow m-0">Waitlist · not a live scan</p>
+      <h1 class="mt-3 text-4xl font-black">Automatic public scans are not shipped yet.</h1>
+      <p class="text-lg text-[var(--muted)]">
+        This form only records interest. It does <strong class="text-[var(--ink)]">not</strong> start a scan, reserve
+        a score, or promise a launch date. For a real review today, use the{" "}
+        <a href="/#founding-review">${site.foundingPriceUsd} Founding Expert Review</a>.
+      </p>
+      <div class="mt-8">
+        <WaitlistForm client:load />
+      </div>
+      <p class="mt-6 text-sm text-[var(--muted)]">{site.requiredDisclaimer}</p>
+    </div>
+  </section>
+</BaseLayout>

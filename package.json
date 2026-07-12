@@ -1,0 +1,13 @@
+{
+  "name": "shipaudit",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.7.0",
+  "scripts": {
+    "dev": "pnpm --filter @shipaudit/web dev",
+    "dev:worker": "pnpm --filter @shipaudit/worker dev",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test"
+  }
+}

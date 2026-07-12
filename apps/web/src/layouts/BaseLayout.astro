@@ -1,0 +1,61 @@
+---
+import "../styles/global.css";
+import { site } from "../lib/site";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f7f8f4" />
+    <meta name="robots" content="index,follow" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="no-print border-b border-[var(--line)] bg-white">
+      <div class="shell flex h-16 items-center justify-between gap-4">
+        <a href="/" class="flex items-center gap-2 no-underline">
+          <span class="grid size-8 place-items-center bg-[var(--green)] text-sm font-black text-white">S</span>
+          <span class="font-extrabold">{site.name}</span>
+        </a>
+        <nav class="flex flex-wrap items-center justify-end gap-x-4 gap-y-2 text-sm font-semibold text-[var(--muted)]">
+          <a href="/pricing">Pricing</a>
+          <a href="/sample-report">Sample</a>
+          <a href="/methodology">Methodology</a>
+          <a href="/#founding-review" class="text-[var(--green)]">Founding review</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="no-print border-t border-[var(--line)] bg-white py-10">
+      <div class="shell grid gap-6">
+        <p class="m-0 max-w-3xl text-sm text-[var(--muted)]">{site.requiredDisclaimer}</p>
+        <div class="flex flex-wrap items-center justify-between gap-3 text-sm text-[var(--muted)]">
+          <p class="m-0">
+            Validation site on <span class="font-semibold text-[var(--ink)]">{site.productHost}</span>
+            · Customer contact:
+            <a class="font-semibold text-[var(--ink)]" href={`mailto:${site.securityEmail}`}>{site.securityEmail}</a>
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="/methodology">Methodology</a>
+            <a href="/responsible-use">Responsible use</a>
+            <a href="/privacy">Privacy</a>
+            <a href="/contact">Contact</a>
+            <a href="/waitlist">Scan waitlist</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

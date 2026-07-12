@@ -1,0 +1,146 @@
+---
+import { AlertTriangle, CheckCircle2, Info, Printer, ShieldAlert } from "lucide-react";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../lib/site";
+
+const findings = [
+  {
+    icon: ShieldAlert,
+    color: "var(--red)",
+    severity: "Fix before launch",
+    title: "Server-side AI credential appears in a client bundle",
+    evidence:
+      "A high-confidence provider key pattern was detected in example data. The displayed value is redacted.",
+    fix: "Revoke the credential, move model calls behind a server endpoint, then add authentication and request limits.",
+  },
+  {
+    icon: AlertTriangle,
+    color: "var(--amber)",
+    severity: "Needs authorized verification",
+    title: "Supabase public configuration is present",
+    evidence:
+      "The anon key is a public identifier and is not a confirmed secret by itself (example data).",
+    fix: "Verify Row Level Security and Storage policies under explicit authorization. Do not rotate the anon key solely because it is visible.",
+  },
+  {
+    icon: CheckCircle2,
+    color: "var(--green)",
+    severity: "Passed (example)",
+    title: "HTTPS and primary cookie attributes",
+    evidence:
+      "HTTPS is reachable in this example. Observed session cookies use Secure, HttpOnly and an explicit SameSite value.",
+    fix: "No immediate action for the illustrated scope.",
+  },
+];
+---
+
+<BaseLayout
+  title="Sample ShipAudit report (example data only)"
+  description="Example ShipAudit founding review layout. Not a real target assessment."
+>
+  <section class="py-10 md:py-14">
+    <div class="shell max-w-4xl">
+      <div class="no-print mb-6 flex flex-wrap items-center justify-between gap-3">
+        <a href="/" class="font-bold text-[var(--green)]">← Back to ShipAudit</a>
+        <button type="button" onclick="window.print()" class="inline-flex h-10 items-center gap-2 border border-[var(--line)] bg-white px-4 font-bold">
+          <Printer size={17} /> Print
+        </button>
+      </div>
+
+      <div class="mb-4 border-l-4 border-[var(--amber)] bg-white p-4 text-sm font-bold">
+        Example data only — this is not a verified check of a real customer domain.
+      </div>
+
+      <article class="border border-[var(--line)] bg-white p-6 md:p-10">
+        <header class="grid gap-6 border-b border-[var(--line)] pb-8 md:grid-cols-[1fr_auto]">
+          <div>
+            <p class="eyebrow m-0">sample_report · expert_review layout</p>
+            <h1 class="mt-3 mb-2 text-3xl font-black md:text-4xl">Demo AI Launch App</h1>
+            <p class="m-0 text-[var(--muted)]">
+              Illustrative target: demo.example · Public homepage + configuration notes
+            </p>
+            <p class="mt-2 mb-0 text-sm text-[var(--muted)]">
+              Reviewed 11 July 2026 · Methodology {site.methodologyVersion} · Example data only
+            </p>
+          </div>
+          <div class="grid place-items-center border-8 border-[var(--amber)] px-4 py-3 text-center">
+            <span class="block text-3xl font-black">72</span>
+            <span class="text-xs font-bold">C</span>
+            <span class="mt-2 max-w-[9rem] text-[10px] leading-tight font-semibold text-[var(--muted)]">
+              {site.scoreSubtitle}
+            </span>
+          </div>
+        </header>
+
+        <section class="border-b border-[var(--line)] py-8">
+          <div class="flex items-start gap-3 bg-[var(--paper)] p-4">
+            <Info className="mt-0.5 shrink-0 text-[var(--blue)]" />
+            <p class="m-0 text-sm">{site.requiredDisclaimer}</p>
+          </div>
+
+          <h2 class="mt-8 text-2xl font-bold">Scope / Non-goals (example)</h2>
+          <div class="mt-4 grid gap-4 text-sm md:grid-cols-2">
+            <div>
+              <p class="m-0 font-bold">Checked in this example</p>
+              <ul class="mt-2 text-[var(--muted)]">
+                <li>Public HTTPS reachability (illustrated)</li>
+                <li>Selected response-header hygiene notes</li>
+                <li>Client-visible configuration patterns (fictional)</li>
+              </ul>
+            </div>
+            <div>
+              <p class="m-0 font-bold">Not checked</p>
+              <ul class="mt-2 text-[var(--muted)]">
+                <li>Authenticated sessions, source code, infra</li>
+                <li>Port scans, exploitation, directory brute force</li>
+                <li>Compliance certification</li>
+              </ul>
+            </div>
+          </div>
+
+          <h2 class="mt-8 text-2xl font-bold">Launch decision (example)</h2>
+          <p class="text-lg">
+            Do not launch with the illustrated AI credential. Revoke it and move the provider call server-side.
+            The Supabase configuration requires an authorized RLS check before it can be classified.
+          </p>
+        </section>
+
+        <section class="grid gap-4 py-8">
+          <h2 class="m-0 text-2xl font-bold">Findings (example)</h2>
+          {findings.map(({ icon: Icon, color, severity, title, evidence, fix }) => (
+            <article class="border border-[var(--line)] p-5">
+              <div class="flex items-start gap-3">
+                <Icon style={{ color }} className="mt-1 shrink-0" />
+                <div>
+                  <p class="m-0 text-xs font-extrabold uppercase" style={{ color }}>{severity}</p>
+                  <h3 class="mt-1 mb-3 text-xl font-bold">{title}</h3>
+                  <dl class="m-0 grid gap-3 text-sm">
+                    <div>
+                      <dt class="font-bold">Evidence</dt>
+                      <dd class="m-0 text-[var(--muted)]">{evidence}</dd>
+                    </div>
+                    <div>
+                      <dt class="font-bold">Recommended action</dt>
+                      <dd class="m-0 text-[var(--muted)]">{fix}</dd>
+                    </div>
+                  </dl>
+                </div>
+              </div>
+            </article>
+          ))}
+        </section>
+
+        <footer class="border-t border-[var(--line)] pt-6 text-sm text-[var(--muted)]">
+          <p class="m-0">
+            <strong class="text-[var(--ink)]">Signature line (real reviews):</strong>{" "}
+            {site.reviewerLine}
+          </p>
+          <p class="mt-2 mb-0">
+            A reviewed report confirms that the listed checks were performed within scope. It does not certify the
+            application as secure. This page uses example data only.
+          </p>
+        </footer>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,11 @@
+node_modules/
+.astro/
+dist/
+.wrangler/
+coverage/
+.env
+.env.*
+!.env.example
+playwright-report/
+test-results/
+

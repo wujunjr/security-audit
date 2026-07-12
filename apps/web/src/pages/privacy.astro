@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../lib/site";
+---
+
+<BaseLayout title="ShipAudit privacy" description="Privacy practices for the ShipAudit validation site.">
+  <section class="py-14 md:py-20">
+    <div class="shell max-w-3xl prose-ship">
+      <p class="eyebrow m-0">Privacy</p>
+      <h1 class="mt-3 text-4xl font-black">Privacy notice (validation phase)</h1>
+      <p class="text-[var(--muted)]">Last updated: 12 July 2026 · Contact: {site.securityEmail}</p>
+
+      <h2 class="text-2xl font-bold">Who we are</h2>
+      <p>
+        ShipAudit is operated as a validation product under {site.productHost}. Customer and security contact:
+        <a href={`mailto:${site.securityEmail}`}>{site.securityEmail}</a>. Infrastructure accounts may use
+        {site.adminEmail} and are not a customer support channel.
+      </p>
+
+      <h2 class="text-2xl font-bold">What we collect</h2>
+      <ul>
+        <li>
+          <strong>Founding review forms:</strong> name, email, app URL, stack, optional launch date and free-text
+          context. Drafts may be stored in your browser sessionStorage until you navigate away.
+        </li>
+        <li>
+          <strong>Email:</strong> messages you send to {site.securityEmail}.
+        </li>
+        <li>
+          <strong>Payments:</strong> processed by the merchant of record (Creem and/or Stripe when configured). We
+          receive payment confirmation metadata needed to fulfill orders; card data is handled by the processor.
+        </li>
+        <li>
+          <strong>Waitlist:</strong> email and optional domain if you join the automatic-scan waitlist.
+        </li>
+        <li>
+          <strong>Hosting logs:</strong> standard CDN/request logs from Cloudflare or the static host (IP truncated or
+          hashed where we control storage per future API design).
+        </li>
+      </ul>
+
+      <h2 class="text-2xl font-bold">What we do not want</h2>
+      <p>
+        Do not send passwords, session cookies, Authorization headers, production secrets or database credentials.
+        If you send them by mistake, tell us immediately so we can delete them from mailboxes.
+      </p>
+
+      <h2 class="text-2xl font-bold">How we use data</h2>
+      <ul>
+        <li>Deliver Founding Expert Reviews and related support</li>
+        <li>Record orders, refunds and SLA timelines</li>
+        <li>Improve checklist quality using aggregated, non-secret lessons</li>
+        <li>Contact waitlist subscribers when automation is ready (no guaranteed date)</li>
+      </ul>
+
+      <h2 class="text-2xl font-bold">Retention</h2>
+      <p>
+        Order and delivery records are kept as long as needed for accounting, dispute handling and product
+        improvement. Waitlist emails can be removed on request. Future automated reports (not yet live) are planned
+        for ~90-day default retention.
+      </p>
+
+      <h2 class="text-2xl font-bold">Sharing</h2>
+      <p>
+        We share data with payment processors and hosting providers as required to operate the service. We do not
+        sell personal data.
+      </p>
+
+      <h2 class="text-2xl font-bold">Your requests</h2>
+      <p>
+        Email {site.securityEmail} to access, correct or delete personal data we hold, subject to legal retention
+        needs for paid orders.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
