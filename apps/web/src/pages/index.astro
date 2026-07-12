@@ -1,6 +1,7 @@
 ---
 import { ArrowRight, BadgeCheck, Clock3, FileSearch, ListChecks, ShieldCheck, Zap, Eye, Code2, Terminal } from "lucide-react";
 import { ReviewRequestForm } from "../components/ReviewRequestForm";
+import { InteractiveScanner } from "../components/InteractiveScanner";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { isPaymentConfigured, site } from "../lib/site";
 
@@ -44,7 +45,7 @@ const process_steps = [
   </div>
 
   <!-- ─── Hero Section ─────────────────────────────────────────── -->
-  <section class="hero-glow relative py-20 md:py-28 lg:py-36">
+  <section class="hero-glow relative pt-10 pb-20 md:pt-14 md:pb-28 lg:pt-16 lg:pb-36">
     <div class="shell relative z-10">
       <div class="grid items-center gap-12 lg:grid-cols-[1.2fr_0.8fr]">
         <div class="fade-in-up">
@@ -72,6 +73,7 @@ const process_steps = [
             <ShieldCheck size={16} className="mt-0.5 shrink-0 text-[var(--emerald)]" />
             {site.requiredDisclaimer}
           </p>
+          <InteractiveScanner client:load />
         </div>
 
         <!-- Hero Card -->

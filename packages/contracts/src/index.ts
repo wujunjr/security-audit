@@ -16,4 +16,25 @@ export interface ReviewRequest {
   tier: ReviewTier;
   context?: string;
 }
+export interface HeaderCheckDetail {
+  name: string;
+  present: boolean;
+  value: string | null;
+  score: number;
+  recommendation: string;
+}
 
+export interface ScanResponse {
+  url: string;
+  score: number;
+  grade: "A" | "B" | "C" | "D" | "F";
+  scannedAt: string;
+  checks: {
+    hsts: HeaderCheckDetail;
+    csp: HeaderCheckDetail;
+    xFrameOptions: HeaderCheckDetail;
+    xContentTypeOptions: HeaderCheckDetail;
+    referrerPolicy: HeaderCheckDetail;
+    serverInfo: HeaderCheckDetail;
+  };
+}
