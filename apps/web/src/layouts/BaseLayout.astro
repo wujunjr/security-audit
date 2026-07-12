@@ -16,46 +16,104 @@ const { title, description } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f7f8f4" />
+    <meta name="theme-color" content="#0a0e17" />
     <meta name="robots" content="index,follow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <title>{title}</title>
   </head>
   <body>
-    <header class="no-print border-b border-[var(--line)] bg-white">
+    <header class="no-print sticky top-0 z-50 border-b border-[var(--line)] bg-[var(--bg-deep)]/80 backdrop-blur-xl">
       <div class="shell flex h-16 items-center justify-between gap-4">
-        <a href="/" class="flex items-center gap-2 no-underline">
-          <span class="grid size-8 place-items-center bg-[var(--green)] text-sm font-black text-white">S</span>
-          <span class="font-extrabold">{site.name}</span>
+        <a href="/" class="flex items-center gap-2.5 no-underline group">
+          <span class="grid size-9 place-items-center rounded-lg bg-gradient-to-br from-[var(--accent)] to-[var(--cyan)] text-sm font-black text-white transition-shadow duration-300 group-hover:shadow-[0_0_20px_var(--glow-accent)]">S</span>
+          <span class="text-lg font-extrabold tracking-tight">{site.name}</span>
         </a>
-        <nav class="flex flex-wrap items-center justify-end gap-x-4 gap-y-2 text-sm font-semibold text-[var(--muted)]">
-          <a href="/pricing">Pricing</a>
-          <a href="/sample-report">Sample</a>
-          <a href="/methodology">Methodology</a>
-          <a href="/#founding-review" class="text-[var(--green)]">Founding review</a>
+        <!-- Mobile menu button -->
+        <button
+          id="mobile-menu-btn"
+          class="flex md:hidden items-center justify-center w-10 h-10 rounded-lg border border-[var(--line)] text-[var(--ink-muted)] hover:text-[var(--ink)] hover:border-[var(--accent)] transition-colors"
+          aria-label="Toggle menu"
+        >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="5" x2="17" y2="5" />
+            <line x1="3" y1="10" x2="17" y2="10" />
+            <line x1="3" y1="15" x2="17" y2="15" />
+          </svg>
+        </button>
+        <nav id="main-nav" class="hidden md:flex flex-wrap items-center justify-end gap-x-1 text-sm font-semibold">
+          <a href="/pricing" class="nav-link rounded-lg px-3 py-2 text-[var(--ink-muted)] hover:text-[var(--ink)] hover:bg-[var(--bg-surface)] transition-all duration-200">Pricing</a>
+          <a href="/sample-report" class="nav-link rounded-lg px-3 py-2 text-[var(--ink-muted)] hover:text-[var(--ink)] hover:bg-[var(--bg-surface)] transition-all duration-200">Sample</a>
+          <a href="/methodology" class="nav-link rounded-lg px-3 py-2 text-[var(--ink-muted)] hover:text-[var(--ink)] hover:bg-[var(--bg-surface)] transition-all duration-200">Methodology</a>
+          <a href="/#founding-review" class="btn-primary ml-2 !h-9 !text-xs !px-4">Get Review</a>
         </nav>
       </div>
+      <!-- Mobile nav -->
+      <nav id="mobile-nav" class="hidden md:hidden border-t border-[var(--line)] bg-[var(--bg-deep)] px-6 py-4 space-y-1">
+        <a href="/pricing" class="block rounded-lg px-3 py-2.5 text-sm font-semibold text-[var(--ink-muted)] hover:text-[var(--ink)] hover:bg-[var(--bg-surface)] transition-all">Pricing</a>
+        <a href="/sample-report" class="block rounded-lg px-3 py-2.5 text-sm font-semibold text-[var(--ink-muted)] hover:text-[var(--ink)] hover:bg-[var(--bg-surface)] transition-all">Sample Report</a>
+        <a href="/methodology" class="block rounded-lg px-3 py-2.5 text-sm font-semibold text-[var(--ink-muted)] hover:text-[var(--ink)] hover:bg-[var(--bg-surface)] transition-all">Methodology</a>
+        <a href="/#founding-review" class="btn-primary mt-2 w-full justify-center !h-10 !text-sm">Get Review</a>
+      </nav>
     </header>
     <main>
       <slot />
     </main>
-    <footer class="no-print border-t border-[var(--line)] bg-white py-10">
-      <div class="shell grid gap-6">
-        <p class="m-0 max-w-3xl text-sm text-[var(--muted)]">{site.requiredDisclaimer}</p>
-        <div class="flex flex-wrap items-center justify-between gap-3 text-sm text-[var(--muted)]">
-          <p class="m-0">
-            Validation site on <span class="font-semibold text-[var(--ink)]">{site.productHost}</span>
-            · Customer contact:
-            <a class="font-semibold text-[var(--ink)]" href={`mailto:${site.securityEmail}`}>{site.securityEmail}</a>
-          </p>
-          <div class="flex flex-wrap gap-4">
-            <a href="/methodology">Methodology</a>
-            <a href="/responsible-use">Responsible use</a>
-            <a href="/privacy">Privacy</a>
-            <a href="/contact">Contact</a>
-            <a href="/waitlist">Scan waitlist</a>
+    <footer class="no-print border-t border-[var(--line)] bg-[var(--bg-deep)]">
+      <div class="shell py-12 md:py-16">
+        <div class="grid gap-8 md:grid-cols-[1.5fr_1fr_1fr] lg:grid-cols-[2fr_1fr_1fr_1fr]">
+          <!-- Brand -->
+          <div>
+            <div class="flex items-center gap-2.5 mb-4">
+              <span class="grid size-8 place-items-center rounded-lg bg-gradient-to-br from-[var(--accent)] to-[var(--cyan)] text-xs font-black text-white">S</span>
+              <span class="text-lg font-extrabold tracking-tight">{site.name}</span>
+            </div>
+            <p class="m-0 max-w-sm text-sm text-[var(--ink-muted)] leading-relaxed">{site.requiredDisclaimer}</p>
           </div>
+          <!-- Product -->
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--ink-faint)] mb-4">Product</h4>
+            <div class="space-y-2.5">
+              <a href="/pricing" class="block text-sm text-[var(--ink-muted)] hover:text-[var(--ink)] transition-colors">Pricing</a>
+              <a href="/sample-report" class="block text-sm text-[var(--ink-muted)] hover:text-[var(--ink)] transition-colors">Sample Report</a>
+              <a href="/methodology" class="block text-sm text-[var(--ink-muted)] hover:text-[var(--ink)] transition-colors">Methodology</a>
+              <a href="/waitlist" class="block text-sm text-[var(--ink-muted)] hover:text-[var(--ink)] transition-colors">Scan Waitlist</a>
+            </div>
+          </div>
+          <!-- Legal -->
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--ink-faint)] mb-4">Legal</h4>
+            <div class="space-y-2.5">
+              <a href="/responsible-use" class="block text-sm text-[var(--ink-muted)] hover:text-[var(--ink)] transition-colors">Responsible Use</a>
+              <a href="/privacy" class="block text-sm text-[var(--ink-muted)] hover:text-[var(--ink)] transition-colors">Privacy</a>
+              <a href="/contact" class="block text-sm text-[var(--ink-muted)] hover:text-[var(--ink)] transition-colors">Contact</a>
+            </div>
+          </div>
+          <!-- Contact -->
+          <div class="hidden lg:block">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--ink-faint)] mb-4">Contact</h4>
+            <a class="block text-sm font-semibold text-[var(--accent)] hover:text-[var(--cyan)] transition-colors" href={`mailto:${site.securityEmail}`}>{site.securityEmail}</a>
+            <p class="mt-2 text-xs text-[var(--ink-faint)]">{site.productHost}</p>
+          </div>
+        </div>
+        <div class="divider mt-10 mb-6"></div>
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[var(--ink-faint)]">
+          <p class="m-0">© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
+          <p class="m-0">
+            <a class="hover:text-[var(--ink-muted)] transition-colors" href={`mailto:${site.securityEmail}`}>{site.securityEmail}</a>
+          </p>
         </div>
       </div>
     </footer>
+
+    <script is:inline>
+      const btn = document.getElementById('mobile-menu-btn');
+      const nav = document.getElementById('mobile-nav');
+      if (btn && nav) {
+        btn.addEventListener('click', () => {
+          nav.classList.toggle('hidden');
+        });
+      }
+    </script>
   </body>
 </html>

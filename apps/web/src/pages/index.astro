@@ -1,5 +1,5 @@
 ---
-import { ArrowRight, BadgeCheck, Clock3, FileSearch, ListChecks, ShieldCheck } from "lucide-react";
+import { ArrowRight, BadgeCheck, Clock3, FileSearch, ListChecks, ShieldCheck, Zap, Eye, Code2, Terminal } from "lucide-react";
 import { ReviewRequestForm } from "../components/ReviewRequestForm";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { isPaymentConfigured, site } from "../lib/site";
@@ -7,154 +7,272 @@ import { isPaymentConfigured, site } from "../lib/site";
 const paymentReady = isPaymentConfigured();
 
 const deliverables = [
-  ["Written reviewed report", "Scope, evidence notes, prioritized actions and unknowns — within stated limits."],
-  ["Public-surface focus", "Observable HTTP hygiene and configuration review. No exploit attempts."],
-  ["Human judgment", "False-positive removal and a clear fix-before-launch versus ship-with-risk note."],
+  { icon: FileSearch, title: "Written Review Report", copy: "Scope, evidence notes, prioritized actions and unknowns — within stated limits. Clear fix-before-launch vs ship-with-risk classification.", color: "var(--accent)" },
+  { icon: Eye, title: "Public-Surface Focus", copy: "Observable HTTP hygiene and configuration review. No exploit attempts, no authenticated sessions, no source code access required.", color: "var(--cyan)" },
+  { icon: BadgeCheck, title: "Human Judgment", copy: "False-positive removal, context-aware risk assessment, and clear recommendations — not raw scanner output.", color: "var(--emerald)" },
+];
+
+const process_steps = [
+  { num: "01", title: "Submit Details", desc: "Fill out the form with your app URL, stack, and concerns." },
+  { num: "02", title: "Pay & Confirm", desc: "Secure checkout via Creem/Stripe. We confirm scope by email." },
+  { num: "03", title: "Expert Analysis", desc: `Up to ${site.foundingMaxMinutes} minutes of focused human review using public tools.` },
+  { num: "04", title: "Get Report", desc: `Written report delivered within ${site.foundingSlaBusinessDays} business days.` },
 ];
 ---
 
 <BaseLayout
-  title="ShipAudit — Pre-launch HTTP security hygiene for web apps"
-  description="Founding expert review of public HTTP security hygiene for indie and AI-assisted web apps. Not a vulnerability scan or certification."
+  title="ShipAudit — Pre-launch HTTP Security Hygiene for Web Apps"
+  description="Expert review of public HTTP security hygiene for indie and AI-assisted web apps. Human judgment, not scanner noise."
 >
-  <div class="border-b border-[var(--line)] bg-[#fdfdfc] py-4 text-sm no-print">
-    <div class="shell flex flex-col md:flex-row md:items-center justify-between gap-3">
-      <div class="flex items-start gap-3">
-        <span class="inline-block shrink-0 bg-[var(--amber)] px-2 py-0.5 text-xs font-bold text-white uppercase rounded-sm">
-          Notice / 公告
-        </span>
-        <div class="text-[var(--ink)] leading-relaxed">
-          <p class="m-0 font-semibold">
-            见己*内在地图已经迁移至 <a href="https://www.jianji.net" target="_blank" rel="noopener noreferrer" class="underline text-[var(--green)] hover:text-[var(--green-dark)] font-bold">www.jianji.net</a>。本网站已改版为网络安全专业站点。
+  <!-- ─── Hero Section ─────────────────────────────────────────── -->
+  <section class="hero-glow relative py-20 md:py-28 lg:py-36">
+    <div class="shell relative z-10">
+      <div class="grid items-center gap-12 lg:grid-cols-[1.2fr_0.8fr]">
+        <div class="fade-in-up">
+          <div class="badge badge-accent mb-6">
+            <Zap size={12} /> Validation Phase · Expert Review
+          </div>
+          <h1 class="my-0 max-w-2xl text-4xl leading-[1.08] font-black tracking-tight md:text-5xl lg:text-[3.5rem]">
+            Ship with confidence.<br />
+            <span class="gradient-text">Not with exposed secrets.</span>
+          </h1>
+          <p class="mt-6 max-w-xl text-lg text-[var(--ink-muted)] md:text-xl leading-relaxed">
+            ShipAudit helps founders shipping with Lovable, Bolt, Replit, Cursor and similar tools understand
+            <strong class="font-semibold text-[var(--ink)]">public configuration risk</strong> before launch.
+            A scoped <strong class="font-semibold text-[var(--ink)]">Founding Expert Review</strong> — not automated noise.
           </p>
-          <p class="m-0 text-xs text-[var(--muted)] mt-0.5">
-            Jianji * Inner Map has been migrated to <a href="https://www.jianji.net" target="_blank" rel="noopener noreferrer" class="underline text-[var(--green)] hover:text-[var(--green-dark)]">www.jianji.net</a>. This website is now a cybersecurity professional website.
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="#founding-review" class="btn-primary">
+              Get Founding Review (${site.foundingPriceUsd}) <ArrowRight size={18} />
+            </a>
+            <a href="/sample-report" class="btn-outline">
+              View Sample Report
+            </a>
+          </div>
+          <p class="mt-6 flex items-start gap-2 text-sm text-[var(--ink-faint)]">
+            <ShieldCheck size={16} className="mt-0.5 shrink-0 text-[var(--emerald)]" />
+            {site.requiredDisclaimer}
           </p>
         </div>
-      </div>
-    </div>
-  </div>
 
-  <section class="border-b border-[var(--line)] bg-white py-14 md:py-20">
-    <div class="shell grid items-start gap-12 lg:grid-cols-[1.15fr_0.85fr]">
-      <div>
-        <p class="eyebrow m-0">Validation phase · Expert review first</p>
-        <h1 class="my-5 max-w-3xl text-4xl leading-[1.05] font-black md:text-5xl">
-          Pre-launch HTTP security hygiene — with a human in the loop.
-        </h1>
-        <p class="max-w-2xl text-lg text-[var(--muted)] md:text-xl">
-          ShipAudit helps founders shipping with Lovable, Bolt, Replit, Cursor and similar tools understand
-          <strong class="font-semibold text-[var(--ink)]">public configuration risk</strong> before launch.
-          Today we sell a scoped <strong class="font-semibold text-[var(--ink)]">Founding Expert Review</strong>.
-          Our own automated scanner is <strong class="font-semibold text-[var(--ink)]">not live yet</strong>.
-        </p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href="#founding-review" class="inline-flex h-12 items-center gap-2 bg-[var(--green)] px-5 font-bold text-white no-underline hover:bg-[var(--green-dark)]">
-            Get founding review (${site.foundingPriceUsd}) <ArrowRight size={18} />
-          </a>
-          <a href="/sample-report" class="inline-flex h-12 items-center border border-[var(--line)] px-5 font-bold no-underline hover:bg-[var(--paper)]">
-            View sample report
-          </a>
-          <a href="/waitlist" class="inline-flex h-12 items-center border border-[var(--line)] px-5 font-bold no-underline hover:bg-[var(--paper)]">
-            Auto-scan waitlist
-          </a>
-        </div>
-        <p class="mt-5 flex items-start gap-2 text-sm text-[var(--muted)]">
-          <ShieldCheck size={17} className="mt-0.5 shrink-0 text-[var(--green)]" />
-          {site.requiredDisclaimer}
-        </p>
+        <!-- Hero Card -->
+        <aside class="glass-card p-6 md:p-8 fade-in-up" style="animation-delay: 0.15s">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="badge badge-cyan">Available Now</span>
+            <span class="badge badge-accent">Limited</span>
+          </div>
+          <h2 class="mb-1 text-2xl font-bold">Founding Expert Review</h2>
+          <p class="mt-0 mb-5">
+            <span class="text-3xl font-black gradient-text">${site.foundingPriceUsd}</span>
+            <span class="text-sm text-[var(--ink-muted)] ml-2">one-time</span>
+          </p>
+          <ul class="m-0 grid list-none gap-3 p-0 text-sm">
+            <li class="flex gap-3 items-start">
+              <ListChecks size={18} className="shrink-0 text-[var(--accent)] mt-0.5" />
+              <span>First <strong>{site.foundingSlotsTotal}</strong> paid orders only</span>
+            </li>
+            <li class="flex gap-3 items-start">
+              <FileSearch size={18} className="shrink-0 text-[var(--accent)] mt-0.5" />
+              <span>1 public app · 1 primary domain · max {site.foundingMaxMinutes} min analysis</span>
+            </li>
+            <li class="flex gap-3 items-start">
+              <Clock3 size={18} className="shrink-0 text-[var(--accent)] mt-0.5" />
+              <span>Written report within <strong>{site.foundingSlaBusinessDays} business days</strong></span>
+            </li>
+            <li class="flex gap-3 items-start">
+              <BadgeCheck size={18} className="shrink-0 text-[var(--accent)] mt-0.5" />
+              <span>Public tools + fixed checklist + human judgment</span>
+            </li>
+          </ul>
+          <div class="divider my-5"></div>
+          <a href="/pricing" class="btn-ghost !px-0 text-sm">Full pricing & deferred SKUs →</a>
+        </aside>
       </div>
-
-      <aside class="border border-[var(--line)] bg-[var(--paper)] p-6 md:p-8" aria-label="What is available now">
-        <p class="eyebrow m-0">Available now</p>
-        <h2 class="mb-3 text-2xl font-bold">Founding Expert Review — ${site.foundingPriceUsd}</h2>
-        <ul class="m-0 grid list-none gap-3 p-0 text-sm">
-          <li class="flex gap-2"><ListChecks size={18} className="shrink-0 text-[var(--green)]" /> First {site.foundingSlotsTotal} paid orders only</li>
-          <li class="flex gap-2"><FileSearch size={18} className="shrink-0 text-[var(--green)]" /> 1 public app · 1 primary domain · max {site.foundingMaxMinutes} minutes analysis</li>
-          <li class="flex gap-2"><Clock3 size={18} className="shrink-0 text-[var(--green)]" /> Written report within {site.foundingSlaBusinessDays} business days after payment, authorization and scope confirmation</li>
-          <li class="flex gap-2"><BadgeCheck size={18} className="shrink-0 text-[var(--green)]" /> Uses public tools + a fixed checklist + human judgment — not ShipAudit auto-scan</li>
-        </ul>
-        <p class="mt-5 mb-0 text-sm text-[var(--muted)]">
-          Payment status:{" "}
-          {paymentReady ? (
-            <span class="font-bold text-[var(--green)]">Checkout link configured</span>
-          ) : (
-            <span class="font-bold text-[var(--amber)]">Checkout link pending (Creem primary / Stripe fallback)</span>
-          )}
-        </p>
-        <a href="/pricing" class="mt-4 inline-block font-bold text-[var(--green)]">Full pricing &amp; deferred SKUs →</a>
-      </aside>
     </div>
   </section>
 
-  <section class="py-14 md:py-20">
+  <!-- ─── Stats Bar ────────────────────────────────────────────── -->
+  <div class="divider"></div>
+  <section class="py-10 bg-[var(--bg-base)]">
     <div class="shell">
-      <p class="eyebrow m-0">What you receive</p>
-      <h2 class="section-title mt-3 max-w-3xl">A scoped launch decision, not a wall of scanner noise.</h2>
-      <div class="mt-9 grid gap-px bg-[var(--line)] md:grid-cols-3">
-        {deliverables.map(([title, copy], index) => (
-          <article class="bg-white p-6">
-            {index === 0 && <FileSearch className="mb-5 text-[var(--blue)]" />}
-            {index === 1 && <ShieldCheck className="mb-5 text-[var(--green)]" />}
-            {index === 2 && <BadgeCheck className="mb-5 text-[var(--amber)]" />}
-            <h3 class="text-xl font-bold">{title}</h3>
-            <p class="mb-0 text-[var(--muted)]">{copy}</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="stat-card">
+          <div class="stat-number">{site.foundingMaxMinutes}</div>
+          <div class="stat-label">Minutes of Expert Analysis</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">{site.foundingSlaBusinessDays}</div>
+          <div class="stat-label">Business Day SLA</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">{site.foundingSlotsTotal}</div>
+          <div class="stat-label">Founding Slots</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">0</div>
+          <div class="stat-label">False Promises</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="divider"></div>
+
+  <!-- ─── Deliverables ─────────────────────────────────────────── -->
+  <section class="py-16 md:py-24 bg-[var(--bg-deep)]">
+    <div class="shell">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <p class="eyebrow m-0 mb-3">What You Receive</p>
+        <h2 class="section-title">A scoped launch decision, not a wall of scanner noise.</h2>
+      </div>
+      <div class="grid gap-6 md:grid-cols-3">
+        {deliverables.map(({ icon: Icon, title, copy, color }, index) => (
+          <article class="glass-card p-6 md:p-8 group" style={`animation-delay: ${index * 0.1}s`}>
+            <div class="mb-5 grid size-12 place-items-center rounded-xl bg-[var(--bg-deep)] border border-[var(--line)] group-hover:border-[var(--line-focus)] transition-all duration-300">
+              <Icon size={22} style={{ color }} />
+            </div>
+            <h3 class="text-xl font-bold mb-2">{title}</h3>
+            <p class="mb-0 text-sm text-[var(--ink-muted)] leading-relaxed">{copy}</p>
           </article>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="border-y border-[var(--line)] bg-white py-14 md:py-20" id="scope">
-    <div class="shell max-w-3xl">
-      <p class="eyebrow m-0">Scope / Non-goals</p>
-      <h2 class="section-title mt-3">Honest boundaries for this validation phase</h2>
-      <div class="mt-8 grid gap-6 md:grid-cols-2">
-        <div class="border border-[var(--line)] p-5">
-          <h3 class="mt-0 text-lg font-bold">In scope (founding review)</h3>
-          <ul class="mb-0 text-sm text-[var(--muted)]">
-            <li>Public HTTP surface of one app / one primary domain</li>
-            <li>Observable hygiene: HTTPS, headers, cookies, obvious public misconfig</li>
-            <li>Customer-supplied read-only screenshots or architecture notes</li>
-            <li>Prioritized actions and false-positive call-outs</li>
+  <!-- ─── Scope / Non-goals ────────────────────────────────────── -->
+  <div class="divider"></div>
+  <section class="py-16 md:py-24 bg-[var(--bg-base)]" id="scope">
+    <div class="shell max-w-4xl">
+      <div class="text-center mb-12">
+        <p class="eyebrow m-0 mb-3">Scope & Non-Goals</p>
+        <h2 class="section-title">Honest boundaries for this validation phase</h2>
+      </div>
+      <div class="grid gap-6 md:grid-cols-2">
+        <div class="glass-card p-6 md:p-8">
+          <div class="flex items-center gap-2 mb-4">
+            <ShieldCheck size={20} className="text-[var(--emerald)]" />
+            <h3 class="m-0 text-lg font-bold">In Scope</h3>
+          </div>
+          <ul class="m-0 p-0 list-none space-y-3 text-sm text-[var(--ink-muted)]">
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--emerald)] mt-0.5">✓</span>
+              Public HTTP surface of one app / one primary domain
+            </li>
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--emerald)] mt-0.5">✓</span>
+              Observable hygiene: HTTPS, headers, cookies, obvious public misconfig
+            </li>
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--emerald)] mt-0.5">✓</span>
+              Customer-supplied read-only screenshots or architecture notes
+            </li>
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--emerald)] mt-0.5">✓</span>
+              Prioritized actions and false-positive call-outs
+            </li>
           </ul>
         </div>
-        <div class="border border-[var(--line)] p-5">
-          <h3 class="mt-0 text-lg font-bold">Out of scope</h3>
-          <ul class="mb-0 text-sm text-[var(--muted)]">
-            <li>Vulnerability exploitation, port scans, directory brute force</li>
-            <li>Authenticated / login-session testing</li>
-            <li>Full API or source-code audit</li>
-            <li>Compliance certification (等保, GDPR “pass”, etc.)</li>
-            <li>ShipAudit-branded automated public scanner (not shipped yet)</li>
+        <div class="glass-card p-6 md:p-8 border-[rgba(248,113,113,0.15)]">
+          <div class="flex items-center gap-2 mb-4">
+            <Code2 size={20} className="text-[var(--red)]" />
+            <h3 class="m-0 text-lg font-bold">Out of Scope</h3>
+          </div>
+          <ul class="m-0 p-0 list-none space-y-3 text-sm text-[var(--ink-muted)]">
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--red)] mt-0.5">✗</span>
+              Vulnerability exploitation, port scans, directory brute force
+            </li>
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--red)] mt-0.5">✗</span>
+              Authenticated / login-session testing
+            </li>
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--red)] mt-0.5">✗</span>
+              Full API or source-code audit
+            </li>
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--red)] mt-0.5">✗</span>
+              Compliance certification (等保, GDPR "pass", etc.)
+            </li>
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--red)] mt-0.5">✗</span>
+              ShipAudit-branded automated scanner (not shipped yet)
+            </li>
           </ul>
         </div>
       </div>
-      <p class="mt-6 text-sm text-[var(--muted)]">{site.requiredDisclaimer}</p>
+      <p class="mt-8 text-center text-sm text-[var(--ink-faint)]">{site.requiredDisclaimer}</p>
     </div>
   </section>
 
-  <section class="py-14 md:py-20" id="founding-review">
-    <div class="shell grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+  <!-- ─── How It Works ─────────────────────────────────────────── -->
+  <div class="divider"></div>
+  <section class="py-16 md:py-24 bg-[var(--bg-deep)]">
+    <div class="shell max-w-4xl">
+      <div class="text-center mb-14">
+        <p class="eyebrow m-0 mb-3">How It Works</p>
+        <h2 class="section-title">Four steps to ship-ready clarity</h2>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {process_steps.map(({ num, title, desc }) => (
+          <div class="text-center">
+            <div class="mono text-3xl font-bold gradient-text mb-3">{num}</div>
+            <h3 class="text-base font-bold mb-2">{title}</h3>
+            <p class="text-sm text-[var(--ink-muted)] m-0">{desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Founding Review Form ─────────────────────────────────── -->
+  <div class="divider"></div>
+  <section class="py-16 md:py-24 bg-[var(--bg-base)]" id="founding-review">
+    <div class="shell grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
       <div>
-        <p class="eyebrow m-0">Founding offer</p>
-        <h2 class="section-title mt-3">Founding Expert Review — ${site.foundingPriceUsd}</h2>
-        <p class="text-lg text-[var(--muted)]">
-          Limited to the first {site.foundingSlotsTotal} paid orders. After payment and scope confirmation we deliver a written reviewed report within {site.foundingSlaBusinessDays} business days.
+        <p class="eyebrow m-0 mb-3">Founding Offer</p>
+        <h2 class="section-title mt-0">Founding Expert Review — <span class="gradient-text">${site.foundingPriceUsd}</span></h2>
+        <p class="text-lg text-[var(--ink-muted)] leading-relaxed">
+          Limited to the first {site.foundingSlotsTotal} paid orders. After payment and scope confirmation we deliver a written report within {site.foundingSlaBusinessDays} business days.
         </p>
-        <ul class="grid list-none gap-3 p-0 text-sm">
-          <li class="flex gap-2"><ShieldCheck size={18} className="shrink-0 text-[var(--green)]" /> No passwords, cookies, or production secrets accepted</li>
-          <li class="flex gap-2"><FileSearch size={18} className="shrink-0 text-[var(--green)]" /> We do not modify your code</li>
-          <li class="flex gap-2"><Clock3 size={18} className="shrink-0 text-[var(--green)]" /> Extra scope is quoted separately — not squeezed into {site.foundingMaxMinutes} minutes</li>
+        <ul class="grid list-none gap-3 p-0 text-sm mt-6">
+          <li class="flex gap-3 items-start">
+            <ShieldCheck size={18} className="shrink-0 text-[var(--emerald)] mt-0.5" />
+            <span>No passwords, cookies, or production secrets accepted</span>
+          </li>
+          <li class="flex gap-3 items-start">
+            <FileSearch size={18} className="shrink-0 text-[var(--accent)] mt-0.5" />
+            <span>We do not modify your code</span>
+          </li>
+          <li class="flex gap-3 items-start">
+            <Clock3 size={18} className="shrink-0 text-[var(--cyan)] mt-0.5" />
+            <span>Extra scope is quoted separately — not squeezed into {site.foundingMaxMinutes} minutes</span>
+          </li>
         </ul>
-        <p class="mt-6 text-sm text-[var(--muted)]">
+        <p class="mt-6 text-sm text-[var(--ink-muted)]">
           Questions before paying? Email{" "}
-          <a class="font-bold text-[var(--ink)]" href={`mailto:${site.securityEmail}`}>{site.securityEmail}</a>.
-          Mailto is for pre-sales only and is not proof of payment.
+          <a class="font-bold text-[var(--accent)] hover:text-[var(--cyan)] transition-colors" href={`mailto:${site.securityEmail}`}>{site.securityEmail}</a>
         </p>
       </div>
       <div>
         <ReviewRequestForm client:load paymentConfigured={paymentReady} />
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Migration Notice ─────────────────────────────────────── -->
+  <div class="divider"></div>
+  <section class="py-8 bg-[var(--bg-deep)]">
+    <div class="shell">
+      <div class="glass-card p-5 flex flex-col md:flex-row md:items-center gap-4">
+        <span class="badge badge-amber shrink-0">Notice / 公告</span>
+        <div class="text-sm text-[var(--ink-muted)] leading-relaxed">
+          <p class="m-0">
+            见己*内在地图已经迁移至 <a href="https://www.jianji.net" target="_blank" rel="noopener noreferrer" class="font-bold text-[var(--accent)] hover:text-[var(--cyan)]">www.jianji.net</a>。本网站已改版为网络安全专业站点。
+          </p>
+          <p class="m-0 mt-1 text-xs text-[var(--ink-faint)]">
+            Jianji * Inner Map has been migrated to <a href="https://www.jianji.net" target="_blank" rel="noopener noreferrer" class="text-[var(--accent)] hover:text-[var(--cyan)]">www.jianji.net</a>. This website is now a cybersecurity professional website.
+          </p>
+        </div>
       </div>
     </div>
   </section>

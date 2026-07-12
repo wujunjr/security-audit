@@ -4,63 +4,109 @@ import { site } from "../lib/site";
 ---
 
 <BaseLayout
-  title="ShipAudit pricing"
+  title="ShipAudit Pricing — Validation Phase"
   description="Validation-phase ShipAudit pricing: Founding Expert Review $99. Automated products deferred."
 >
-  <section class="py-14 md:py-20">
-    <div class="shell max-w-3xl">
-      <p class="eyebrow m-0">Pricing · validation phase</p>
-      <h1 class="mt-3 text-4xl font-black">Two public SKUs only.</h1>
-      <p class="text-lg text-[var(--muted)]">
-        Per product spec §12.1 we do not advertise automatic report prices, monitoring, or multi-tier packages
-        until delivery exists and commercial gates pass. Currency is USD.
-      </p>
+  <section class="hero-glow relative py-16 md:py-24">
+    <div class="shell relative z-10 max-w-4xl">
+      <div class="text-center mb-14 fade-in-up">
+        <p class="eyebrow m-0 mb-3">Pricing · Validation Phase</p>
+        <h1 class="mt-0 text-4xl font-black md:text-5xl">Simple, honest pricing.</h1>
+        <p class="mt-4 text-lg text-[var(--ink-muted)] max-w-2xl mx-auto">
+          We do not advertise automatic report prices, monitoring, or multi-tier packages until delivery exists and commercial gates pass. Currency is USD.
+        </p>
+      </div>
 
-      <div class="mt-10 grid gap-6">
-        <article class="border border-[var(--line)] bg-white p-6">
-          <p class="eyebrow m-0">Free</p>
-          <h2 class="mt-2 text-2xl font-bold">Validation assets · $0</h2>
-          <ul class="text-[var(--muted)]">
-            <li>Landing page and methodology</li>
-            <li>Sample report marked Example data only</li>
-            <li>
-              <a href="/waitlist">Automatic public scan waitlist</a> (not a live scan service; no ship date promised)
+      <div class="grid gap-6 md:grid-cols-3">
+        <!-- Free Tier -->
+        <article class="glass-card p-6 md:p-8 flex flex-col">
+          <div class="badge badge-accent mb-4 self-start">Free</div>
+          <h2 class="mt-0 text-2xl font-bold">Validation Assets</h2>
+          <p class="mt-1 mb-6">
+            <span class="text-3xl font-black gradient-text">$0</span>
+          </p>
+          <ul class="m-0 p-0 list-none space-y-3 text-sm text-[var(--ink-muted)] flex-1">
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--emerald)] mt-0.5">✓</span>
+              Landing page and methodology
+            </li>
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--emerald)] mt-0.5">✓</span>
+              Sample report marked <em>Example data only</em>
+            </li>
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--emerald)] mt-0.5">✓</span>
+              <a href="/waitlist" class="text-[var(--accent)] hover:text-[var(--cyan)]">Automatic public scan waitlist</a> (not a live scan; no ship date)
             </li>
           </ul>
+          <a href="/sample-report" class="btn-outline mt-6 w-full justify-center">View Sample</a>
         </article>
 
-        <article class="border-2 border-[var(--green)] bg-white p-6">
-          <p class="eyebrow m-0">Paid · limited</p>
-          <h2 class="mt-2 text-2xl font-bold">Founding Expert Review · ${site.foundingPriceUsd}</h2>
-          <p class="text-[var(--muted)]">First {site.foundingSlotsTotal} paid orders.</p>
-          <ul class="text-[var(--muted)]">
-            <li>1 public app and 1 primary domain</li>
-            <li>Max {site.foundingMaxMinutes} minutes analysis time</li>
-            <li>Written report within {site.foundingSlaBusinessDays} business days after payment + authorization + scope confirmation</li>
-            <li>Public tools + fixed checklist + human judgment</li>
+        <!-- Founding Expert Review -->
+        <article class="glass-card p-6 md:p-8 flex flex-col relative overflow-hidden" style="border-color: var(--accent);">
+          <div class="absolute top-0 right-0 bg-gradient-to-l from-[var(--accent)] to-[var(--cyan)] text-white text-xs font-bold px-4 py-1 rounded-bl-lg">Recommended</div>
+          <div class="badge badge-cyan mb-4 self-start">Paid · Limited</div>
+          <h2 class="mt-0 text-2xl font-bold">Founding Expert Review</h2>
+          <p class="mt-1 mb-6">
+            <span class="text-3xl font-black gradient-text">${site.foundingPriceUsd}</span>
+            <span class="text-sm text-[var(--ink-muted)] ml-2">one-time</span>
+          </p>
+          <p class="text-sm text-[var(--ink-muted)] mb-4">First {site.foundingSlotsTotal} paid orders.</p>
+          <ul class="m-0 p-0 list-none space-y-3 text-sm text-[var(--ink-muted)] flex-1">
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--emerald)] mt-0.5">✓</span>
+              1 public app and 1 primary domain
+            </li>
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--emerald)] mt-0.5">✓</span>
+              Max {site.foundingMaxMinutes} minutes analysis time
+            </li>
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--emerald)] mt-0.5">✓</span>
+              Written report within {site.foundingSlaBusinessDays} business days
+            </li>
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--emerald)] mt-0.5">✓</span>
+              Public tools + fixed checklist + human judgment
+            </li>
           </ul>
-          <a
-            href="/#founding-review"
-            class="mt-2 inline-flex h-11 items-center bg-[var(--green)] px-4 font-bold text-white no-underline"
-          >
-            Start founding review
-          </a>
+          <a href="/#founding-review" class="btn-primary mt-6 w-full justify-center">Start Founding Review</a>
         </article>
 
-        <article class="border border-dashed border-[var(--line)] bg-[var(--paper)] p-6">
-          <p class="eyebrow m-0">Deferred</p>
-          <h2 class="mt-2 text-2xl font-bold">Not for sale yet</h2>
-          <ul class="mb-0 text-[var(--muted)]">
-            <li>Verified Launch Check (automated)</li>
-            <li>Standard Expert Review</li>
-            <li>Code &amp; Architecture Review</li>
-            <li>Monitoring subscriptions</li>
-            <li>Badges / “secure by” marketing marks</li>
+        <!-- Deferred -->
+        <article class="glass-card p-6 md:p-8 flex flex-col" style="border-style: dashed; opacity: 0.7;">
+          <div class="badge badge-amber mb-4 self-start">Deferred</div>
+          <h2 class="mt-0 text-2xl font-bold">Not for Sale Yet</h2>
+          <p class="mt-1 mb-6">
+            <span class="text-3xl font-black text-[var(--ink-faint)]">TBD</span>
+          </p>
+          <ul class="m-0 p-0 list-none space-y-3 text-sm text-[var(--ink-muted)] flex-1">
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--ink-faint)] mt-0.5">○</span>
+              Verified Launch Check (automated)
+            </li>
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--ink-faint)] mt-0.5">○</span>
+              Standard Expert Review
+            </li>
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--ink-faint)] mt-0.5">○</span>
+              Code &amp; Architecture Review
+            </li>
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--ink-faint)] mt-0.5">○</span>
+              Monitoring subscriptions
+            </li>
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--ink-faint)] mt-0.5">○</span>
+              Badges / "secure by" marketing marks
+            </li>
           </ul>
+          <a href="/waitlist" class="btn-outline mt-6 w-full justify-center">Join Waitlist</a>
         </article>
       </div>
 
-      <p class="mt-8 text-sm text-[var(--muted)]">{site.requiredDisclaimer}</p>
+      <p class="mt-10 text-center text-sm text-[var(--ink-faint)]">{site.requiredDisclaimer}</p>
     </div>
   </section>
 </BaseLayout>

@@ -4,43 +4,58 @@ import { site } from "../lib/site";
 ---
 
 <BaseLayout
-  title="Payment received — ShipAudit"
+  title="Payment Received — ShipAudit"
   description="What happens after you pay for a ShipAudit Founding Expert Review."
 >
-  <section class="py-14 md:py-20">
+  <section class="py-16 md:py-24 bg-[var(--bg-deep)]">
     <div class="shell max-w-2xl">
-      <p class="eyebrow m-0">Checkout</p>
-      <h1 class="mt-3 text-4xl font-black">Thanks — next we confirm scope.</h1>
-      <p class="text-lg text-[var(--muted)]">
-        If you completed payment with our merchant link, keep the receipt. Analysis does not start until we confirm
-        authorization and scope by email.
-      </p>
+      <div class="fade-in-up">
+        <div class="badge badge-green mb-4">Checkout</div>
+        <h1 class="mt-0 text-4xl font-black md:text-5xl">Thanks — next we confirm scope.</h1>
+        <p class="mt-4 text-lg text-[var(--ink-muted)]">
+          If you completed payment with our merchant link, keep the receipt. Analysis does not start until we confirm
+          authorization and scope by email.
+        </p>
+      </div>
 
-      <ol class="grid list-decimal gap-3 pl-5 text-[var(--muted)]">
-        <li>
-          Email your receipt and app URL to{" "}
-          <a class="font-bold text-[var(--ink)]" href={`mailto:${site.securityEmail}`}>{site.securityEmail}</a>
-          if the processor did not already capture them.
-        </li>
-        <li>We confirm the single domain/app and public-surface limits (max {site.foundingMaxMinutes} minutes).</li>
-        <li>
-          Written report within {site.foundingSlaBusinessDays} business days after confirmation (SLA pauses if you
-          delay materials).
-        </li>
-      </ol>
+      <div class="glass-card p-6 md:p-8 mt-10">
+        <h2 class="mt-0 text-xl font-bold mb-5">Next Steps</h2>
+        <div class="space-y-5">
+          <div class="flex gap-4">
+            <div class="mono text-2xl font-bold gradient-text shrink-0">01</div>
+            <p class="m-0 text-[var(--ink-muted)]">
+              Email your receipt and app URL to{" "}
+              <a class="font-bold text-[var(--accent)] hover:text-[var(--cyan)] transition-colors" href={`mailto:${site.securityEmail}`}>{site.securityEmail}</a>{" "}
+              if the processor did not already capture them.
+            </p>
+          </div>
+          <div class="flex gap-4">
+            <div class="mono text-2xl font-bold gradient-text shrink-0">02</div>
+            <p class="m-0 text-[var(--ink-muted)]">
+              We confirm the single domain/app and public-surface limits (max {site.foundingMaxMinutes} minutes).
+            </p>
+          </div>
+          <div class="flex gap-4">
+            <div class="mono text-2xl font-bold gradient-text shrink-0">03</div>
+            <p class="m-0 text-[var(--ink-muted)]">
+              Written report within {site.foundingSlaBusinessDays} business days after confirmation (SLA pauses if you delay materials).
+            </p>
+          </div>
+        </div>
+      </div>
 
-      <div class="mt-8 border border-[var(--line)] bg-white p-5 text-sm">
+      <div class="glass-card p-6 mt-6 border-l-4" style="border-left-color: var(--amber);">
         <p class="mt-0 font-bold text-[var(--ink)]">Refunds (summary)</p>
-        <ul class="mb-0 text-[var(--muted)]">
-          <li>Full refund if you cancel before work starts, or we cannot begin within agreed scope.</li>
-          <li>If we miss the {site.foundingSlaBusinessDays}-business-day delivery window for our reasons: delay or full refund.</li>
-          <li>After delivery: corrections first; refund if material scope error cannot be fixed.</li>
+        <ul class="mb-0 p-0 list-none space-y-2 text-sm text-[var(--ink-muted)]">
+          <li class="flex gap-2"><span class="text-[var(--amber)]">•</span> Full refund if you cancel before work starts, or we cannot begin within agreed scope.</li>
+          <li class="flex gap-2"><span class="text-[var(--amber)]">•</span> If we miss the {site.foundingSlaBusinessDays}-business-day delivery window for our reasons: delay or full refund.</li>
+          <li class="flex gap-2"><span class="text-[var(--amber)]">•</span> After delivery: corrections first; refund if material scope error cannot be fixed.</li>
         </ul>
       </div>
 
-      <p class="mt-6 text-sm text-[var(--muted)]">
+      <p class="mt-6 text-sm text-[var(--ink-faint)]">
         Did not pay yet?{" "}
-        <a class="font-bold text-[var(--ink)]" href="/#founding-review">Return to founding review</a>.
+        <a class="font-bold text-[var(--accent)] hover:text-[var(--cyan)] transition-colors" href="/#founding-review">Return to founding review</a>.
       </p>
     </div>
   </section>

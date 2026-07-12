@@ -5,22 +5,24 @@ import { site } from "../lib/site";
 ---
 
 <BaseLayout
-  title="ShipAudit automatic scan waitlist"
+  title="ShipAudit Automatic Scan Waitlist"
   description="Join the waitlist for ShipAudit public automated baseline scans. Not a live service yet."
 >
-  <section class="py-14 md:py-20">
+  <section class="py-16 md:py-24 bg-[var(--bg-deep)]">
     <div class="shell max-w-xl">
-      <p class="eyebrow m-0">Waitlist · not a live scan</p>
-      <h1 class="mt-3 text-4xl font-black">Automatic public scans are not shipped yet.</h1>
-      <p class="text-lg text-[var(--muted)]">
-        This form only records interest. It does <strong class="text-[var(--ink)]">not</strong> start a scan, reserve
-        a score, or promise a launch date. For a real review today, use the{" "}
-        <a href="/#founding-review">${site.foundingPriceUsd} Founding Expert Review</a>.
-      </p>
+      <div class="fade-in-up">
+        <div class="badge badge-amber mb-4">Waitlist · Not a Live Scan</div>
+        <h1 class="mt-0 text-4xl font-black">Automatic public scans are not shipped yet.</h1>
+        <p class="mt-4 text-lg text-[var(--ink-muted)]">
+          This form only records interest. It does <strong class="text-[var(--ink)]">not</strong> start a scan, reserve
+          a score, or promise a launch date. For a real review today, use the{" "}
+          <a href="/#founding-review" class="font-bold text-[var(--accent)] hover:text-[var(--cyan)] transition-colors">${site.foundingPriceUsd} Founding Expert Review</a>.
+        </p>
+      </div>
       <div class="mt-8">
         <WaitlistForm client:load />
       </div>
-      <p class="mt-6 text-sm text-[var(--muted)]">{site.requiredDisclaimer}</p>
+      <p class="mt-6 text-sm text-[var(--ink-faint)]">{site.requiredDisclaimer}</p>
     </div>
   </section>
 </BaseLayout>

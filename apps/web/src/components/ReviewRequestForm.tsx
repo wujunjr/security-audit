@@ -95,32 +95,32 @@ export function ReviewRequestForm({
 
   if (submitted) {
     return (
-      <div className="border border-[var(--line)] bg-white p-6">
-        <CheckCircle2 className="mb-3 text-[var(--green)]" aria-hidden="true" />
+      <div className="glass-card p-6 md:p-8">
+        <CheckCircle2 className="mb-3 text-[var(--emerald)]" aria-hidden="true" size={28} />
         <h3 className="m-0 text-xl font-bold">
           {canCheckout ? "Continue to payment" : "Your inquiry draft is ready"}
         </h3>
-        <p className="mb-4 text-[var(--muted)]">
+        <p className="mb-4 text-[var(--ink-muted)]">
           {canCheckout
             ? "If checkout did not open, use the button below. After payment you will land on the success page — keep your receipt."
             : "Checkout is not configured on this deployment yet. Send the email so we can share a payment link manually. Mailto alone is not proof of purchase."}
         </p>
         {canCheckout ? (
           <a
-            className="inline-flex h-11 items-center gap-2 bg-[var(--green)] px-4 font-bold text-white no-underline"
+            className="btn-primary"
             href={resolvedPaymentUrl}
           >
             <CreditCard size={18} aria-hidden="true" />
             Open payment link
           </a>
         ) : (
-          <a className="font-bold text-[var(--green)]" href={mailto}>
-            Open the email again
+          <a className="btn-ghost !px-0" href={mailto}>
+            Open the email again →
           </a>
         )}
-        <p className="mt-4 mb-0 text-sm text-[var(--muted)]">
+        <p className="mt-4 mb-0 text-sm text-[var(--ink-faint)]">
           After paying, open{" "}
-          <a className="font-semibold text-[var(--ink)]" href="/payment-success">
+          <a className="font-semibold text-[var(--accent)] hover:text-[var(--cyan)]" href="/payment-success">
             /payment-success
           </a>{" "}
           and email your receipt to {securityEmail}.
@@ -132,86 +132,89 @@ export function ReviewRequestForm({
   return (
     <form
       onSubmit={submit}
-      className="grid gap-4 border border-[var(--line)] bg-white p-6"
+      className="glass-card grid gap-5 p-6 md:p-8"
       id="review-request"
     >
       <div>
-        <p className="eyebrow m-0">Founding Expert Review · $99</p>
-        <h2 className="mt-2 text-2xl font-bold">Tell us what you are shipping</h2>
-        <p className="m-0 text-sm text-[var(--muted)]">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="badge badge-cyan">Founding Expert Review</span>
+          <span className="badge badge-accent">$99</span>
+        </div>
+        <h2 className="mt-1 text-2xl font-bold">Tell us what you are shipping</h2>
+        <p className="m-0 text-sm text-[var(--ink-muted)]">
           {canCheckout
             ? "Submit to continue to checkout. We confirm scope before analysis starts."
             : "Payment link not set on this build — submit opens a pre-sales email. We will send a real checkout link separately."}
         </p>
       </div>
       <div className="grid gap-4 md:grid-cols-2">
-        <label className="grid gap-1 text-sm font-bold">
+        <label className="grid gap-1.5 text-sm font-bold">
           Name
           <input
             required
-            className="h-11 border border-[var(--line)] px-3 font-normal"
+            className="input-field"
             value={form.name}
             onChange={(event) => setForm({ ...form, name: event.target.value })}
           />
         </label>
-        <label className="grid gap-1 text-sm font-bold">
+        <label className="grid gap-1.5 text-sm font-bold">
           Email
           <input
             required
             type="email"
-            className="h-11 border border-[var(--line)] px-3 font-normal"
+            className="input-field"
             value={form.email}
             onChange={(event) => setForm({ ...form, email: event.target.value })}
           />
         </label>
-        <label className="grid gap-1 text-sm font-bold">
+        <label className="grid gap-1.5 text-sm font-bold">
           App URL
           <input
             required
             type="url"
             placeholder="https://your-app.com"
-            className="h-11 border border-[var(--line)] px-3 font-normal"
+            className="input-field"
             value={form.appUrl}
             onChange={(event) => setForm({ ...form, appUrl: event.target.value })}
           />
         </label>
-        <label className="grid gap-1 text-sm font-bold">
+        <label className="grid gap-1.5 text-sm font-bold">
           Stack
           <input
             required
             placeholder="Lovable + Supabase + Vercel"
-            className="h-11 border border-[var(--line)] px-3 font-normal"
+            className="input-field"
             value={form.stack}
             onChange={(event) => setForm({ ...form, stack: event.target.value })}
           />
         </label>
-        <label className="grid gap-1 text-sm font-bold md:col-span-2">
+        <label className="grid gap-1.5 text-sm font-bold md:col-span-2">
           Target launch date
           <input
             type="date"
-            className="h-11 border border-[var(--line)] px-3 font-normal"
+            className="input-field"
             value={form.launchDate}
             onChange={(event) =>
               setForm({ ...form, launchDate: event.target.value })
             }
           />
         </label>
-        <label className="grid gap-1 text-sm font-bold md:col-span-2">
+        <label className="grid gap-1.5 text-sm font-bold md:col-span-2">
           What worries you most?
           <textarea
             rows={4}
-            className="border border-[var(--line)] p-3 font-normal"
+            className="textarea-field"
             placeholder="Auth, exposed keys, Supabase RLS, AI endpoint cost..."
             value={form.context}
             onChange={(event) => setForm({ ...form, context: event.target.value })}
           />
         </label>
       </div>
-      <label className="flex items-start gap-2 text-sm">
+      <label className="flex items-start gap-3 text-sm text-[var(--ink-muted)] cursor-pointer">
         <input
           required
           type="checkbox"
-          className="mt-1"
+          className="mt-1 accent-[var(--accent)]"
           checked={form.agreeScope}
           onChange={(event) =>
             setForm({ ...form, agreeScope: event.target.checked })
@@ -225,9 +228,9 @@ export function ReviewRequestForm({
       </label>
       <button
         type="submit"
-        className="flex h-12 items-center justify-center gap-2 bg-[var(--green)] px-5 font-bold text-white hover:bg-[var(--green-dark)]"
+        className="btn-primary w-full justify-center"
       >
-        {canCheckout ? "Continue to payment" : "Request payment link by email"}
+        {canCheckout ? "Continue to Payment" : "Request Payment Link by Email"}
         <ArrowRight size={18} aria-hidden="true" />
       </button>
     </form>

@@ -3,74 +3,94 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { site } from "../lib/site";
 ---
 
-<BaseLayout title="ShipAudit privacy" description="Privacy practices for the ShipAudit validation site.">
-  <section class="py-14 md:py-20">
-    <div class="shell max-w-3xl prose-ship">
-      <p class="eyebrow m-0">Privacy</p>
-      <h1 class="mt-3 text-4xl font-black">Privacy notice (validation phase)</h1>
-      <p class="text-[var(--muted)]">Last updated: 12 July 2026 · Contact: {site.securityEmail}</p>
+<BaseLayout title="ShipAudit Privacy" description="Privacy practices for the ShipAudit validation site.">
+  <section class="py-16 md:py-24 bg-[var(--bg-deep)]">
+    <div class="shell max-w-3xl">
+      <div class="fade-in-up">
+        <p class="eyebrow m-0 mb-3">Privacy</p>
+        <h1 class="mt-0 text-4xl font-black md:text-5xl">Privacy notice (validation phase)</h1>
+        <p class="mt-3 text-[var(--ink-muted)]">Last updated: 12 July 2026 · Contact: {site.securityEmail}</p>
+      </div>
 
-      <h2 class="text-2xl font-bold">Who we are</h2>
-      <p>
-        ShipAudit is operated as a validation product under {site.productHost}. Customer and security contact:
-        <a href={`mailto:${site.securityEmail}`}>{site.securityEmail}</a>. Infrastructure accounts may use
-        {site.adminEmail} and are not a customer support channel.
-      </p>
+      <div class="mt-10 space-y-6">
+        <div class="glass-card p-6 md:p-8">
+          <h2 class="mt-0 text-xl font-bold mb-3">Who We Are</h2>
+          <p class="mb-0 text-[var(--ink-muted)] leading-relaxed">
+            ShipAudit is operated as a validation product under {site.productHost}. Customer and security contact:
+            <a href={`mailto:${site.securityEmail}`} class="font-bold text-[var(--accent)] hover:text-[var(--cyan)] transition-colors">{site.securityEmail}</a>. Infrastructure accounts may use
+            {site.adminEmail} and are not a customer support channel.
+          </p>
+        </div>
 
-      <h2 class="text-2xl font-bold">What we collect</h2>
-      <ul>
-        <li>
-          <strong>Founding review forms:</strong> name, email, app URL, stack, optional launch date and free-text
-          context. Drafts may be stored in your browser sessionStorage until you navigate away.
-        </li>
-        <li>
-          <strong>Email:</strong> messages you send to {site.securityEmail}.
-        </li>
-        <li>
-          <strong>Payments:</strong> processed by the merchant of record (Creem and/or Stripe when configured). We
-          receive payment confirmation metadata needed to fulfill orders; card data is handled by the processor.
-        </li>
-        <li>
-          <strong>Waitlist:</strong> email and optional domain if you join the automatic-scan waitlist.
-        </li>
-        <li>
-          <strong>Hosting logs:</strong> standard CDN/request logs from Cloudflare or the static host (IP truncated or
-          hashed where we control storage per future API design).
-        </li>
-      </ul>
+        <div class="glass-card p-6 md:p-8">
+          <h2 class="mt-0 text-xl font-bold mb-3">What We Collect</h2>
+          <ul class="m-0 p-0 list-none space-y-3 text-[var(--ink-muted)]">
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--accent)] mt-0.5 shrink-0">•</span>
+              <span><strong class="text-[var(--ink)]">Founding review forms:</strong> name, email, app URL, stack, optional launch date and free-text context. Drafts may be stored in your browser sessionStorage until you navigate away.</span>
+            </li>
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--accent)] mt-0.5 shrink-0">•</span>
+              <span><strong class="text-[var(--ink)]">Email:</strong> messages you send to {site.securityEmail}.</span>
+            </li>
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--accent)] mt-0.5 shrink-0">•</span>
+              <span><strong class="text-[var(--ink)]">Payments:</strong> processed by the merchant of record (Creem and/or Stripe when configured). We receive payment confirmation metadata needed to fulfill orders; card data is handled by the processor.</span>
+            </li>
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--accent)] mt-0.5 shrink-0">•</span>
+              <span><strong class="text-[var(--ink)]">Waitlist:</strong> email and optional domain if you join the automatic-scan waitlist.</span>
+            </li>
+            <li class="flex gap-2 items-start">
+              <span class="text-[var(--accent)] mt-0.5 shrink-0">•</span>
+              <span><strong class="text-[var(--ink)]">Hosting logs:</strong> standard CDN/request logs from Cloudflare or the static host (IP truncated or hashed where we control storage per future API design).</span>
+            </li>
+          </ul>
+        </div>
 
-      <h2 class="text-2xl font-bold">What we do not want</h2>
-      <p>
-        Do not send passwords, session cookies, Authorization headers, production secrets or database credentials.
-        If you send them by mistake, tell us immediately so we can delete them from mailboxes.
-      </p>
+        <div class="glass-card p-6 md:p-8 border-l-4" style="border-left-color: var(--red);">
+          <h2 class="mt-0 text-xl font-bold mb-3 text-[var(--red)]">What We Do Not Want</h2>
+          <p class="mb-0 text-[var(--ink-muted)] leading-relaxed">
+            Do not send passwords, session cookies, Authorization headers, production secrets or database credentials.
+            If you send them by mistake, tell us immediately so we can delete them from mailboxes.
+          </p>
+        </div>
 
-      <h2 class="text-2xl font-bold">How we use data</h2>
-      <ul>
-        <li>Deliver Founding Expert Reviews and related support</li>
-        <li>Record orders, refunds and SLA timelines</li>
-        <li>Improve checklist quality using aggregated, non-secret lessons</li>
-        <li>Contact waitlist subscribers when automation is ready (no guaranteed date)</li>
-      </ul>
+        <div class="glass-card p-6 md:p-8">
+          <h2 class="mt-0 text-xl font-bold mb-3">How We Use Data</h2>
+          <ul class="m-0 p-0 list-none space-y-2 text-[var(--ink-muted)]">
+            <li class="flex gap-2"><span class="text-[var(--emerald)]">✓</span> Deliver Founding Expert Reviews and related support</li>
+            <li class="flex gap-2"><span class="text-[var(--emerald)]">✓</span> Record orders, refunds and SLA timelines</li>
+            <li class="flex gap-2"><span class="text-[var(--emerald)]">✓</span> Improve checklist quality using aggregated, non-secret lessons</li>
+            <li class="flex gap-2"><span class="text-[var(--emerald)]">✓</span> Contact waitlist subscribers when automation is ready (no guaranteed date)</li>
+          </ul>
+        </div>
 
-      <h2 class="text-2xl font-bold">Retention</h2>
-      <p>
-        Order and delivery records are kept as long as needed for accounting, dispute handling and product
-        improvement. Waitlist emails can be removed on request. Future automated reports (not yet live) are planned
-        for ~90-day default retention.
-      </p>
+        <div class="glass-card p-6 md:p-8">
+          <h2 class="mt-0 text-xl font-bold mb-3">Retention</h2>
+          <p class="mb-0 text-[var(--ink-muted)] leading-relaxed">
+            Order and delivery records are kept as long as needed for accounting, dispute handling and product
+            improvement. Waitlist emails can be removed on request. Future automated reports (not yet live) are planned
+            for ~90-day default retention.
+          </p>
+        </div>
 
-      <h2 class="text-2xl font-bold">Sharing</h2>
-      <p>
-        We share data with payment processors and hosting providers as required to operate the service. We do not
-        sell personal data.
-      </p>
+        <div class="glass-card p-6 md:p-8">
+          <h2 class="mt-0 text-xl font-bold mb-3">Sharing</h2>
+          <p class="mb-0 text-[var(--ink-muted)] leading-relaxed">
+            We share data with payment processors and hosting providers as required to operate the service. We do not
+            sell personal data.
+          </p>
+        </div>
 
-      <h2 class="text-2xl font-bold">Your requests</h2>
-      <p>
-        Email {site.securityEmail} to access, correct or delete personal data we hold, subject to legal retention
-        needs for paid orders.
-      </p>
+        <div class="glass-card p-6 md:p-8">
+          <h2 class="mt-0 text-xl font-bold mb-3">Your Requests</h2>
+          <p class="mb-0 text-[var(--ink-muted)] leading-relaxed">
+            Email <a href={`mailto:${site.securityEmail}`} class="font-bold text-[var(--accent)] hover:text-[var(--cyan)] transition-colors">{site.securityEmail}</a> to access, correct or delete personal data we hold, subject to legal retention
+            needs for paid orders.
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>

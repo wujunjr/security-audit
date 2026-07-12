@@ -15,6 +15,34 @@
    * **允许行为**：仅观察公开的 HTTP 响应头、Cookie 属性、及静态 HTML/JS 中显式暴露的信息（如 Source Map 是否未关闭，是否缺失安全响应头如 HSTS, CSP, X-Frame-Options 等）。
    * **价值先导**：找到一个确定的、公开可见的安全配置小缺失，作为触达时的“免费安全预警提示”。
 
+### 1.1 如何在社交媒体和社区高效搜寻目标
+以下是推荐使用的具体搜索指令和平台：
+
+* **Twitter/X 搜寻关键词**：
+  * `"built with lovable" min_faves:1`
+  * `"just launched my AI app" OR "launched my project"`
+  * `"bolt.new project" OR "built with bolt.new"`
+  * `"deployed to vercel" cursor app`
+* **Product Hunt**：
+  * 每日榜单（Launch Today）中，点进产品的 Landing Page，查看其技术栈和 HTTP 头。
+* **Indie Hackers / Reddit (r/sideproject, r/saas)**：
+  * 寻找发帖抱怨 "security worries"、"exposed env keys" 或者分享 "just shipped a new app" 的用户。
+
+### 1.2 零干扰、零入侵排查命令（工具库）
+在触达前，我们只需要使用基本的、合法的网络检测工具，**千万不要进行端口扫描**：
+
+```bash
+# 1. 检查安全头（Headers）与服务器信息
+curl -I -sS https://target-app.com
+
+# 2. 检查静态资源的 JS Source Map 是否暴露（在浏览器 DevTools Network 中查看，或用 curl 测试是否存在 .map 后缀）
+curl -I -s -o /dev/null -w "%{http_code}" https://target-app.com/assets/index.js.map
+# 若返回 200，说明 Source Map 暴露，任何人都能反编译其前端源码
+
+# 3. 检查敏感的 Cookie 属性是否缺少 Secure 或 HttpOnly
+curl -i -s https://target-app.com | grep -i "Set-Cookie"
+```
+
 ---
 
 ## 2. 触达渠道选择
@@ -54,7 +82,72 @@ ShipAudit Founder
 security@laws3.net | https://www.laws3.net
 ```
 
-### 3.2 Twitter/X 创始人私信模板（Short DM）
+### 3.2 针对特定配置缺失的细化模板
+
+#### 模板 A：JS Source Map 泄露（最常见的 AI 代码生成弊端）
+**主题**：Security alert: Exposed frontend source code on [AppName]
+
+```text
+Hi [Founder Name],
+
+Congrats on shipping [AppName]! 
+
+While browsing your site, I noticed that the production Javascript build has Source Maps enabled and publicly accessible (e.g., [Exact JS file URL].map). 
+
+This means anyone can easily reverse-engineer your client-side source code, see your folder structure, and inspect your API calling logic in plain English. 
+
+I’ve compiled a quick step-by-step guide on how to turn this off in your bundler (Vite/Webpack/Next.js). Let me know if you'd like me to send it over.
+
+For context, I run ShipAudit (https://www.laws3.net) where we review pre-launch HTTP hygiene for indie and AI-assisted apps. We're currently doing $99 Founding Expert Reviews (limited to 10 slots) to manually check endpoints, public cookies, and Supabase RLS policies before launch.
+
+Let me know if you want the source maps fix info!
+
+Best,
+[Your Name]
+```
+
+#### 模板 B：缺失关键安全响应头 (HSTS / CSP / X-Frame-Options)
+**主题**：Observable security headers missing on [AppName]
+
+```text
+Hi [Founder Name],
+
+I was checking out [AppName] after seeing your launch. It looks really clean!
+
+I did a quick, passive check on your HTTP response headers and noticed that basic Clickjacking and Protocol security headers are missing:
+- No Strict-Transport-Security (HSTS)
+- No Content-Security-Policy (CSP)
+- No X-Frame-Options (making the app iframeable elsewhere)
+
+It takes less than 10 minutes to configure these on Vercel/Netlify/Cloudflare. I can write down the exact lines you need to add to your config files if you'd like.
+
+I'm building ShipAudit (https://www.laws3.net) to help indie founders audit their public surface security configs for a flat $99 (no subscription, just a manual checklist review by a human). 
+
+Let me know if you want the config snippets for the security headers!
+
+Best,
+[Your Name]
+```
+
+#### 模板 C：Cookie 缺少 Secure 或 HttpOnly 保护
+**主题**：Quick heads-up regarding session cookies on [AppName]
+
+```text
+Hi [Founder Name],
+
+Congrats on launching [AppName]!
+
+While testing your public page response, I noticed your session/authentication cookies seem to be missing the [HttpOnly / Secure / SameSite] flag. Without these, the session identifiers are accessible to client-side scripts, increasing XSS risks.
+
+I can share the code snippet to enforce secure cookie configuration for your tech stack. Just let me know.
+
+I'm the founder of ShipAudit (https://www.laws3.net) where we provide pre-launch security reviews for $99. Let me know if you want the secure cookie fix or want us to do a wider review!
+
+Best,
+[Your Name]
+```
+
+### 3.3 Twitter/X 创始人私信模板（Short DM）
 
 ```text
 Hi [Founder Name], love what you've built with [AppName]!
