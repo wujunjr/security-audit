@@ -5,13 +5,13 @@
 
 export const site = {
   name: "ShipAudit",
-  productHost: "security.laws3.net",
+  productHost: "www.laws3.net",
   /** Customer-facing contact */
   securityEmail: "security@laws3.net",
   /** Infrastructure accounts only — do not show as customer contact */
   adminEmail: "admin@laws3.net",
   /** Public homepage URL used in User-Agent later; also brand link */
-  publicUrl: "https://security.laws3.net",
+  publicUrl: "https://www.laws3.net",
   methodologyVersion: "0.1-validation",
   foundingPriceUsd: 99,
   foundingSlotsTotal: 10,

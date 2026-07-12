@@ -51,7 +51,7 @@ Best regards,
 
 [Your Name]
 ShipAudit Founder
-security@laws3.net | https://security.laws3.net
+security@laws3.net | https://www.laws3.net
 ```
 
 ### 3.2 Twitter/X 创始人私信模板（Short DM）
@@ -63,7 +63,7 @@ Quick heads-up: I noticed your production build is [exposing JS source maps / mi
 
 If you'd like, I can drop the exact details on how to fix it here.
 
-For context, we are running ShipAudit (security.laws3.net) helping early-stage apps audit pre-launch security configurations. We also do a $99 hands-on expert review covering SSRF risks and endpoint auth.
+For context, we are running ShipAudit (www.laws3.net) helping early-stage apps audit pre-launch security configurations. We also do a $99 hands-on expert review covering SSRF risks and endpoint auth.
 
 Let me know if you want the fix info!
 ```
