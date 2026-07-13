@@ -24,3 +24,15 @@ describe("GET /api/health", () => {
   });
 });
 
+describe("GET /", () => {
+  it("returns the root welcome response", async () => {
+    const response = await app.request("http://localhost/");
+    expect(response.status).toBe(200);
+    const body = await response.json();
+    expect(body).toMatchObject({
+      name: "ShipAudit API",
+      status: "operational",
+    });
+  });
+});
+

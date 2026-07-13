@@ -12,6 +12,18 @@ app.use("/api/*", cors({
   maxAge: 600,
 }));
 
+app.get("/", (context) => {
+  return context.json({
+    name: "ShipAudit API",
+    description: "Pre-launch HTTP Security Hygiene API",
+    status: "operational",
+    endpoints: {
+      health: "/api/health",
+      scan: "/api/scan?url=<domain>"
+    }
+  });
+});
+
 app.get("/api/health", (context) => {
   const response: HealthResponse = {
     ok: true,
